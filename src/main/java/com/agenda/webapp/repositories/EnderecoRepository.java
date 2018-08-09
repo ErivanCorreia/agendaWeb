@@ -1,8 +1,8 @@
-package com.agenda.webpp.repositories;
+package com.agenda.webapp.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.agenda.webpp.domain.Endereco;
+import com.agenda.webapp.domain.Endereco;
 
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer>{
 

@@ -1,4 +1,4 @@
-package com.agenda.webpp.domain;
+package com.agenda.webapp.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Endereco implements Serializable{
@@ -24,7 +27,8 @@ public class Endereco implements Serializable{
 	private String bairro;
 	private String rua;
 	
-	@OneToMany(mappedBy = "endereco")
+	@JsonIgnore
+	@OneToMany(mappedBy = "endereco", cascade = CascadeType.ALL)
 	private List<Contato> contato = new ArrayList<>();
 	
 	public Endereco() {

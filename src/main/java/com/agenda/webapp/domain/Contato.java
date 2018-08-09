@@ -1,9 +1,10 @@
-package com.agenda.webpp.domain;
+package com.agenda.webapp.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -12,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Contato implements Serializable{
@@ -32,17 +32,18 @@ public class Contato implements Serializable{
 	@CollectionTable(name = "EMAIL")
 	private Set<String> emails = new HashSet<>();
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco")
 	private Endereco endereco;
 	
 	public Contato() {
 		
 	}
 	
-	public Contato(Integer id, String nome) {
+	public Contato(Integer id, String nome, Endereco endereco) {
 		this.id = id;
 		this.nome = nome;
-		//this.endereco = endereco;
+		this.endereco = endereco;
 	}
 	
 	public Integer getId() {
