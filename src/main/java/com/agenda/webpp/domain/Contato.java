@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Contato implements Serializable{
@@ -29,6 +32,9 @@ public class Contato implements Serializable{
 	@CollectionTable(name = "EMAIL")
 	private Set<String> emails = new HashSet<>();
 	
+	@ManyToOne
+	private Endereco endereco;
+	
 	public Contato() {
 		
 	}
@@ -36,6 +42,7 @@ public class Contato implements Serializable{
 	public Contato(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
+		//this.endereco = endereco;
 	}
 	
 	public Integer getId() {
@@ -66,4 +73,11 @@ public class Contato implements Serializable{
 		return emails;
 	}
 	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(Endereco endereco) {
+		 this.endereco =endereco;
+	}
 }
