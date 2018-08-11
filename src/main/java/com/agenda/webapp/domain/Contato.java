@@ -74,6 +74,10 @@ public class Contato implements Serializable{
 		return emails;
 	}
 	
+	public void setEmails(Set<String> emails) {
+		this.emails = emails;
+	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
