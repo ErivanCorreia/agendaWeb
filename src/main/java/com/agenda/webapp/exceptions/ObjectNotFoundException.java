@@ -1,6 +1,6 @@
 package com.agenda.webapp.exceptions;
 
-public class ContatoNotFoundException extends RuntimeException {
+public class ObjectNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
 	private String mensagem;
@@ -13,7 +13,7 @@ public class ContatoNotFoundException extends RuntimeException {
 		this.mensagem = mensagem;
 	}
 
-	public ContatoNotFoundException(String mensagem) {
+	public ObjectNotFoundException(String mensagem) {
 		super(mensagem);
 	}
 	

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agenda.webapp.domain.Contato;
+import com.agenda.webapp.dto.ContatoDTO;
 import com.agenda.webapp.services.ContatoService;
 
 @RestController
@@ -20,12 +21,14 @@ public class ContatoResource {
 	@Autowired
 	private ContatoService service;
 	
+	//listando todos um contato através do seu id
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET )
 	public ResponseEntity<Contato> find(@PathVariable Integer id){
 		Contato obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	//listando todos os contatos
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Contato>> findAll(){
 		List<Contato> list = service.findAll();
@@ -33,19 +36,27 @@ public class ContatoResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	
+	//inserindo um contato adicionando um endereço existente
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Contato> insert(@RequestBody Contato obj){
+	public ResponseEntity<Contato> insert(@RequestBody ContatoDTO objDTO){
+		Contato obj = service.toContatoDTO(objDTO);
 		service.insert(obj);
 		return ResponseEntity.ok().build();
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Contato> update(@RequestBody Contato obj, @PathVariable Integer id){
-		obj.setId(id);
-		obj = service.update(obj);
-		
-		return ResponseEntity.noContent().build();
-	}
+	
+	//atualizando um contato adicionando um endereço existente no banco
+		@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+		public ResponseEntity<Contato> update(@RequestBody ContatoDTO objDTO, @PathVariable Integer id){
+			
+			Contato obj = service.toContatoDTO(objDTO);
+			
+			obj.setId(id);
+			obj = service.update(obj);
+			
+			return ResponseEntity.noContent().build();
+		}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id){
@@ -54,5 +65,6 @@ public class ContatoResource {
 		
 		return ResponseEntity.noContent().build();
 	}
+
 	
 }
