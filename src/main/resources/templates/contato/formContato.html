@@ -1,0 +1,70 @@
+<!DOCTYPE html>	
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset=UTF-8>
+	<title>Agenda</title>
+	  <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+	<div align="center"><h1>Cadastrar Contato</h1></div>
+	<div class="container"><h3><a href="http://localhost:8080/" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Início</a></h3></div>
+
+		<form class="container" method="post">
+			<label>Nome</label>
+			<input type="text" value"" name="nome"/>
+			
+			<div class="row">
+					
+				<div class="input-field col s6">
+					<i class="material-icons prefix">phone</i>
+					<input placeholder="Telefone 1" id="icon_telephone" type="tel" value"" name="telefone1"/>
+	 				
+				</div>
+				
+				<div class="input-field col s6">
+					<i class="material-icons prefix">phone</i>
+					<input placeholder="Telefone 2" id="icon_telephone" type="tel" value"" name="telefone2" class="validate">
+				</div>
+			</div>	
+			
+			<div class="row">
+					
+				<div class="input-field col s6">
+					<i class="material-icons prefix">email</i>
+					<input placeholder="Email 1" type="text" value"" name="email1"/>
+	 				
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">email</i>
+					<input placeholder="Email 2" type="text" value"" name="email2"/>	
+				</div>
+			
+			<label>Estado</label>
+			<input type="text" value"" name="estado"/>	
+			
+			<label>Cidade</label>
+			<input type="text" value"" name="cidade"/>
+			
+			<label>Bairro</label>
+			<input type="text" value"" name="bairro"/>
+			
+			<label>Rusa</label>
+			<input type="text" value"" name="rua"/>
+	
+			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+		</form>
+	
+  
+   	  <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

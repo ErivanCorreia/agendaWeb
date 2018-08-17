@@ -89,6 +89,11 @@ public class Endereco implements Serializable{
 	public void setContato(List<Contato> contato) {
 		this.contato = contato;
 	}
+
+	@Override
+	public String toString() {
+		return  cidade + ", " + estado + ", " + bairro + ", " + rua;
+	}
 	
 	
 

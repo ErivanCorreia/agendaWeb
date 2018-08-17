@@ -3,12 +3,14 @@ package com.agenda.webapp.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.agenda.webapp.domain.Contato;
+import com.agenda.webapp.domain.Endereco;
 import com.agenda.webapp.dto.ContatoDTO;
 import com.agenda.webapp.exceptions.ObjectNotFoundException;
 import com.agenda.webapp.repositories.ContatoRepository;
@@ -62,13 +64,32 @@ public class ContatoService {
 	public Contato toContatoDTO(ContatoDTO objDTO) {
 		
 		Contato obj = new Contato(null, objDTO.getNome(), null);
+		
+		obj.getEmails().add(objDTO.getEmail1());
+		if(objDTO.getTelefone2() !=null) {
+			obj.getEmails().add(objDTO.getEmail2());
+		}
+		
+		obj.getTelefones().add(objDTO.getTelefone1());
+		if(objDTO.getTelefone2() != null) {
+			obj.getTelefones().add(objDTO.getTelefone2());
+		}
+		
+		Endereco endereco = new Endereco(objDTO.getCidade(), objDTO.getEstado(), objDTO.getBairro(), objDTO.getRua());
+		obj.setEndereco(endereco);
+		return obj;
+	}	
+	
+	/*public Contato toContatoDTO(ContatoDTO objDTO) {
+		
+		Contato obj = new Contato(null, objDTO.getNome(), null);
 		obj.getEmails().addAll(objDTO.getEmails());
 		obj.getTelefones().addAll(objDTO.getTelefones());
 		obj.setEndereco(enderecoService.find(objDTO.getEnderecoId()));
 		
 		return obj;
 	
-	}
+	}*/
 	
 	
 	public void delete(Contato contato) {
