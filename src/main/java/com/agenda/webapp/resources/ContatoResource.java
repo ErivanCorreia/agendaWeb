@@ -2,6 +2,8 @@ package com.agenda.webapp.resources;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,7 @@ import com.agenda.webapp.dto.ContatoDTO;
 import com.agenda.webapp.services.ContatoService;
 
 
-//@RequestMapping(value = "/contatos")
+
 @Controller
 public class ContatoResource {
 
@@ -26,7 +28,7 @@ public class ContatoResource {
 	
 	@RequestMapping(value = "/cadastrarContato", method = RequestMethod.GET)
 	public String insert() {
-		return "contato/formContato";
+		return "contato/inserirContato";
 	}
 	
 	@RequestMapping(value = "/cadastrarContato", method = RequestMethod.POST)
@@ -47,6 +49,54 @@ public class ContatoResource {
 		mv.addObject("contatos", list);
 		
 		return mv;
+	}
+	
+	
+	@RequestMapping("/{id}")
+	public String delete(@PathVariable("id") Integer id){
+		
+		Contato obj = service.find(id);
+		service.delete(obj);
+		
+		return "redirect:/contatos";		
+	}
+	
+	@RequestMapping(value= "/editarContato/{id}")
+	public ModelAndView update(@PathParam("id") Integer id, ContatoDTO bjoDTO){
+		
+		Contato obj = service.find(id);
+		
+		obj = service.toContatoDTO(bjoDTO);
+		obj.setId(id);
+		
+		service.update(obj);
+		
+		ModelAndView mv = new ModelAndView("contato/editarContato");
+		mv.addObject("contato", obj);
+		
+		return mv;
+	}
+	
+	/*@RequestMapping(value= "/editarContato/{id}", method =RequestMethod.POST)
+	public String update(@PathVariable("id") Integer id, @RequestBody ContatoDTO objDTO){
+		
+		Contato ctt = service.find(id);
+		objDTO.setId(id);
+		ctt = service.toContatoDTO(objDTO);
+		service.update(ctt);	
+		//obj.setId(id);
+		//obj = service.update(obj);
+		return "redirect:/contatos";
+		
+	}
+	
+	/*@RequestMapping("/{id}")
+	public void delete(@PathVariable("id") Integer id) {
+		Contato obj = service.find(id);
+		service.delete(obj);
+		//ModelAndView mv = new ModelAndView("index");
+		//mv.addObject("contato", obj);
+		//return "redirect:/contatos";
 	}
 	/*
 		@RequestMapping(value="/contatos", method = RequestMethod.GET)

@@ -56,8 +56,12 @@ public class ContatoService {
 		newobj.setTelefones(obj.getTelefones());
 		newobj.setEmails(obj.getEmails());
 		newobj.setEndereco(obj.getEndereco());
+		
+		if(newobj.getNome() != null) {
+			return contatoRepository.save(newobj);
+		}
 
-		return contatoRepository.save(newobj);
+		return newobj;
 	
 	}
 	

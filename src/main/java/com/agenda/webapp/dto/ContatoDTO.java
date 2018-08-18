@@ -7,6 +7,8 @@ import java.util.Set;
 public class ContatoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
+	
 	private String nome;
 	private String telefone1;
 	private String telefone2;
@@ -94,6 +96,14 @@ public class ContatoDTO implements Serializable{
 
 	public void setEmail2(String email2) {
 		this.email2 = email2;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	
