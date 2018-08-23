@@ -20,7 +20,7 @@ public class AgendawebappApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(AgendawebappApplication.class, args);
 	}
@@ -48,7 +48,6 @@ public class AgendawebappApplication implements CommandLineRunner{
 		contatoRepository.saveAll(Arrays.asList(c1, c2, c3));
 		enderecoRepository.saveAll(Arrays.asList(e1));
 		
-		
-		
 	}
+	
 }
