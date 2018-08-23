@@ -71,7 +71,7 @@ public class ContatoResource {
 		
 		service.update(obj);
 		
-		ModelAndView mv = new ModelAndView("contato/editarContato");
+		ModelAndView mv = new ModelAndView("editarContato");
 		mv.addObject("contato", obj);
 		
 		return mv;
