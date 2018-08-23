@@ -3,7 +3,6 @@ package com.agenda.webapp.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +19,6 @@ public class ContatoService {
 	
 	@Autowired
 	private ContatoRepository contatoRepository;
-	
-	@Autowired
-	private EnderecoService enderecoService;
 	
 	
 	public Contato find(Integer id) {
