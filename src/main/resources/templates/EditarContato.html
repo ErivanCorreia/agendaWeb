@@ -19,47 +19,49 @@
 	<div class="container"><h3><a href="/" class="waves-effect waves-light btn"><i class="material-icons left">format_list_bulleted</i>Início</a></h3></div>
 
 	<div>
-		<form class="container" method="post">
+		<form th:action="@{/editarContato/{id}(id=${contato.id})}" class="container" method="post">
 			<label>Nome</label>
-			<input type="text"  name="nome" required/>
+			<input type="text"  name="nome" th:value="${contato.nome}" required/>
 			
 			<div class="row">
-					
-				<div class="input-field col s6">
-					<i class="material-icons prefix">phone</i>
-					<input placeholder="Telefone 1" id="icon_telephone" type="tel" name="telefone1"/>
-	 				
-				</div>
-				
-				<div class="input-field col s6">
-					<i class="material-icons prefix">phone</i>
-					<input placeholder="Telefone 2" id="icon_telephone" type="tel" name="telefone2" class="validate">
+				<div th:each="telefone,key : ${contato.telefones}" >
+						<div class="input-field col s6">
+							<i class="material-icons prefix">phone</i>
+							<input th:placeholder="'Telefone ' + ${key.index+1}" id="icon_telephone" th:name="'telefone' + ${key.index+1}" type="tel" th:value="${telefone}" />		 
+						</div>
+						<div th:if="${key.size == 1 }" class="input-field col s6">
+								<i class="material-icons prefix">phone</i>
+								<input placeholder="Telefone 2" id="icon_telephone" name="telefone2" type="tel" />	
+						</div>
 				</div>
 			</div>	
 			
 			<div class="row">
-					
-				<div class="input-field col s6">
-					<i class="material-icons prefix">email</i>
-					<input placeholder="Email 1" type="text" name="email1" required/>
-	 				
-				</div>
-				<div class="input-field col s6">
-					<i class="material-icons prefix">email</i>
-					<input placeholder="Email 2" type="text" name="email2"/>	
+				
+				<div class="row">
+					<div th:each="email,key : ${contato.emails}" >
+							<div class="input-field col s6">
+								<i class="material-icons prefix">email</i>
+								<input th:placeholder="'Email ' + ${key.index+1}" type="email" th:name="'email' + ${key.index+1}" th:value="${email}" required/>		 
+							</div>
+							<div th:if="${key.size == 1 }" class="input-field col s6">
+									<i class="material-icons prefix">email</i>
+								<input placeholder="'Email 2" type="email" name="email2" required/>		 	
+							</div>
+					</div>
 				</div>
 			
 			<label>Estado</label>
-			<input type="text" name="estado"/>	
+			<input type="text" name="estado" th:value="${contato.endereco.estado}"/>	
 			
 			<label>Cidade</label>
-			<input type="text" name="cidade"/>
+			<input type="text" name="cidade" th:value="${contato.endereco.cidade}"/>
 			
 			<label>Bairro</label>
-			<input type="text" name="bairro"/>
+			<input type="text" name="bairro" th:value="${contato.endereco.bairro}"/>
 			
 			<label>Rua</label>
-			<input type="text" name="rua"/>
+			<input type="text" name="rua" th:value="${contato.endereco.rua}"/>
 	
 			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
 		</div>	

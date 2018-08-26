@@ -2,8 +2,6 @@ package com.agenda.webapp.resources;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,17 +57,29 @@ public class ContatoResource {
 		return "redirect:/contatos";		
 	}
 	
-	@RequestMapping(value= "/editarContato/{id}")
-	@ResponseBody 
+	@RequestMapping(value= "/editarContato/{id}", method = RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView update(@PathVariable("id") Integer id, ContatoDTO bjoDTO){
 		
 		Contato obj = service.find(id);
 		
 		obj = service.toContatoDTO(bjoDTO);
+
 		obj.setId(id);
-		
+			
 		service.update(obj);
+
+		ModelAndView mv = new ModelAndView("editarContato");
+		mv.addObject("contato", obj);
 		
+		return mv;
+	}
+
+	@RequestMapping(value= "/editarContato/{id}", method = RequestMethod.GET)
+	public ModelAndView getContato(@PathVariable("id") Integer id){
+		
+		Contato obj = service.find(id);
+
 		ModelAndView mv = new ModelAndView("editarContato");
 		mv.addObject("contato", obj);
 		
