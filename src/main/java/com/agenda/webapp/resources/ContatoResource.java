@@ -61,7 +61,7 @@ public class ContatoResource {
 	
 	@RequestMapping(value= "/editarContato/{id}")
 	@ResponseBody 
-	public ModelAndView update(@PathParam("id") Integer id, ContatoDTO bjoDTO){
+	public ModelAndView update(@PathVariable("id") Integer id, ContatoDTO bjoDTO){
 		
 		Contato obj = service.find(id);
 		
